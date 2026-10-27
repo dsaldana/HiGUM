@@ -1166,204 +1166,198 @@ Please report this to https://github.com/markedjs/marked.`,e){let e=`<p>An error
 <body>
 <div class="reveal">
 <div class="slides">
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-001.mp4" data-background-video-muted="">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-001-08ded37582.mp4" data-background-video-muted="">
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-002.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-002-0b1e55abcb.mp4">
 <aside class="notes" data-markdown="">Introduce HiGUM: one hierarchical representation connects smoke data to cooperative planning. University logo sources: https://www.lehigh.edu/LTS/communication/logos/; https://www.uta.edu/</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-003.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-003-e03586bcea.mp4">
 <aside class="notes" data-markdown="">Forest smoke motivates spatially resolved monitoring. Photo credit and license are recorded in assets/forest_smoke_source.json.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-004.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-004-2b77d6d610.mp4">
 <aside class="notes" data-markdown="">The goal is to connect dense smoke data with cooperative UAV planning. Image source: https://commons.wikimedia.org/wiki/File:Wildfire_(14503287131).jpg</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-005.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-005-f086d000f6.mp4">
 <aside class="notes" data-markdown="">Related work: voxel representation. The exact 900 Figure 1 samples are shown. Voxblox is a volumetric distance-field mapping system using dynamically allocated hashed voxel blocks: https://voxblox.readthedocs.io/en/latest/ . This is a scalar-smoke illustration of the fixed-resolution grid data structure, not a Voxblox reproduction. The finite enclosing cube is an illustration choice, not a claim that Voxblox stores a dense fixed-extent grid. No TSDF/ESDF or free space is inferred. Click to bin the samples.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-006.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-006-e26bf8aca7.mp4">
 <aside class="notes" data-markdown="">Uniform voxel grid: 8 cells per axis, 57 nonempty cells. Width is domain side L/8 = 1.004 in source coordinates. Each of the 900 samples belongs to exactly one displayed cell; color is the arithmetic mean measured PM2.5. Unstored cells are unobserved here, not inferred free space. Click to halve the common cell width.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-007.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-007-bcca5ece23.mp4">
 <aside class="notes" data-markdown="">Uniform voxel grid: 16 cells per axis, 195 nonempty cells. Width is domain side L/16 = 0.502 in source coordinates. Each of the 900 samples belongs to exactly one displayed cell; color is the arithmetic mean measured PM2.5. Unstored cells are unobserved here, not inferred free space. Click to compare an adaptive octree.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-008.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-008-4482bfadf5.mp4">
 <aside class="notes" data-markdown="">Related work: octree. A cube encloses the same 900 Figure 1 samples. OctoMap is a probabilistic occupancy mapping system: https://octomap.github.io/ . This illustration uses only its axis-aligned eight-way spatial subdivision, not occupancy probabilities, ray integration or inferred free space. Click to split the root into its eight equal child cubes.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-009.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-009-94c3259fdd.mp4">
 <aside class="notes" data-markdown="">Adaptive octree at maximum displayed depth 1: 8 nonempty leaf cubes; leaf counts by depth: {1: 8}. Every split divides one parent into eight equal spatial octants; only children containing measured samples are stored. Each sample belongs to exactly one displayed leaf. Colors are leaf mean PM2.5, not occupancy probabilities. Click to refine dense cells further.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-010.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-010-4cce870df7.mp4">
 <aside class="notes" data-markdown="">Adaptive octree at maximum displayed depth 3: 54 nonempty leaf cubes; leaf counts by depth: {1: 3, 2: 2, 3: 49}. Every split divides one parent into eight equal spatial octants; only children containing measured samples are stored. Each sample belongs to exactly one displayed leaf. Colors are leaf mean PM2.5, not occupancy probabilities. Click to refine dense cells further.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-011.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-011-1434e490b8.mp4">
 <aside class="notes" data-markdown="">Adaptive octree at maximum displayed depth 4: 122 nonempty leaf cubes; leaf counts by depth: {1: 3, 2: 2, 3: 36, 4: 81}. Every split divides one parent into eight equal spatial octants; only children containing measured samples are stored. Each sample belongs to exactly one displayed leaf. Colors are leaf mean PM2.5, not occupancy probabilities. Compare the adaptive axis-aligned cubes with HiGUM's subsequent data-driven binary Gaussian hierarchy. These are qualitative representation differences; no runtime or storage benchmark is claimed.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-012.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-012-fd64ec623f.mp4">
 <aside class="notes" data-markdown="">Click to introduce the smoke samples.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-013.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-013-879296e9db.mp4">
 <aside class="notes" data-markdown="">Dense 3-D samples preserve spatial detail. Click to introduce the Gaussian hierarchy.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-014.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-014-0371c2d50e.mp4">
 <aside class="notes" data-markdown="">The hierarchy offers selectable resolution. Click to introduce fleet planning.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-015.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-015-f9f6809aee.mp4">
 <aside class="notes" data-markdown="">UAVs independently track their allocated waypoint tours. Click for the main connection.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-016.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-016-1692e0cdd2.mp4">
 <aside class="notes" data-markdown="">A dense cloud preserves detail. The hierarchy offers a choice of planning resolution.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-017.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-017-8a99dbd6b5.mp4">
 <aside class="notes" data-markdown="">Figure 1a. Reveal the synthetic point cloud. The reveal is a visual build, not a time evolution of smoke.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-018.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-018-12e0c859a8.mp4">
 <aside class="notes" data-markdown="">Figure 1b. A single Gaussian is compact but misses the separate source geometry.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-019.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-019-c6f0e329cb.mp4">
 <aside class="notes" data-markdown="">Figure 1c. Four leaf partitions replace the root through recursive binary splits.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-020.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-020-32dced96a8.mp4">
 <aside class="notes" data-markdown="">Figure 1d. Sixteen leaf partitions. Colors encode each subset's arithmetic mean concentration.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-021.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-021-90617d702d.mp4">
 <aside class="notes" data-markdown="">The Gaussian describes the distribution of point positions.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-022.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-022-9bcb68a048.mp4">
 <aside class="notes" data-markdown="">Concentration is summarized separately. It does not enter the spatial GMM fit. Covariance axes show two standard deviations.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-023.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-023-fc5eeb00ec.mp4">
 <aside class="notes" data-markdown="">Figure 2: 2 leaf partitions. Colors distinguish subsets on this slide. Every child is fitted only within its parent dataset.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-024.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-024-9ead016ec0.mp4">
 <aside class="notes" data-markdown="">Figure 2: 4 leaf partitions. Colors distinguish subsets on this slide. Every child is fitted only within its parent dataset.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-025.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-025-cf61ecb7c7.mp4">
 <aside class="notes" data-markdown="">Figure 2: 8 leaf partitions. Colors distinguish subsets on this slide. Every child is fitted only within its parent dataset.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-026.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-026-26357d7803.mp4">
 <aside class="notes" data-markdown="">Responsibility bars are illustrative probabilities, not measured concentration. EM iterates until log-likelihood convergence.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-027.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-027-fcf936ce72.mp4">
 <aside class="notes" data-markdown="">Hard assignments create disjoint child datasets. The arithmetic concentration mean is computed after partitioning.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-028.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-028-4cf517e388.mp4">
 <aside class="notes" data-markdown="">Click to reveal the WRF-FIRE smoke point cloud.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-029.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-029-b56f649b0b.mp4">
 <aside class="notes" data-markdown="">Figure 3a. Extract a regular-grid smoke concentration point cloud. This is a static snapshot.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-030.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-030-63291cee94.mp4">
 <aside class="notes" data-markdown="">The root contains the entire WRF-FIRE point cloud. Click to split it into two children.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-031.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-031-6d25dd747e.mp4">
 <aside class="notes" data-markdown="">HGM level 1 contains 2 Gaussian ellipsoids. Click to refine the next level. Color represents mean PM2.5 on a logarithmic scale.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-032.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-032-23bb6107e8.mp4">
 <aside class="notes" data-markdown="">HGM level 2 contains 4 Gaussian ellipsoids. Click to refine the next level. Color represents mean PM2.5 on a logarithmic scale.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-033.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-033-443be1d27c.mp4">
 <aside class="notes" data-markdown="">HGM level 3 contains 8 Gaussian ellipsoids. Click to refine the next level. Color represents mean PM2.5 on a logarithmic scale.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-034.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-034-501ec7e11c.mp4">
 <aside class="notes" data-markdown="">HGM level 4 contains 16 Gaussian ellipsoids. Click to refine the next level. Color represents mean PM2.5 on a logarithmic scale.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-035.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-035-ba1a4ed222.mp4">
 <aside class="notes" data-markdown="">HGM level 5 contains 32 Gaussian ellipsoids. Click to refine the next level. Color represents mean PM2.5 on a logarithmic scale.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-036.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-036-77f460a347.mp4">
 <aside class="notes" data-markdown="">The planner uses the horizontal projection of HGM centroids. Flights use a prescribed constant altitude.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-037.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-037-f6cab772bd.mp4">
 <aside class="notes" data-markdown="">K-means produces disjoint waypoint sets, one per UAV. Spatial clustering does not itself enforce balanced workloads.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-038.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-038-13457bd016.mp4">
 <aside class="notes" data-markdown="">An exact depot-aware Hamiltonian cycle orders each small cluster. Dashed segments specify the intended waypoint tours.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-039.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-039-c5345f4dbf.mp4">
 <aside class="notes" data-markdown="">State: horizontal x, y, and heading psi. Fixed speed and altitude, with bounded steering. Photo illustrates an environmental-monitoring UAV, not the platform used in the paper. Photo source: https://www.nasa.gov/image-detail/crater-052025-loiacono-3978/. Click to show the Dubins motion diagram.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-040.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-040-1f4769b429.mp4">
 <aside class="notes" data-markdown="">Analytic left-straight-right Dubins illustration. Circular arcs have radius R_min, and meet the straight segment tangentially. R_min follows from the paper's continuous planar model. The schematic is separate from the NMPC-generated Figure 4 trajectories. Dubins reference: https://ompl.kavrakilab.org/core/classompl_1_1base_1_1DubinsStateSpace.html. Click to fly the left turn.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-041.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-041-0a9b880346.mp4">
 <aside class="notes" data-markdown="">Left turn at the minimum radius. Click to fly the straight segment.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-042.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-042-41d167d944.mp4">
 <aside class="notes" data-markdown="">Straight segment with zero steering. Click to fly the right turn.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-043.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-043-281cb357ec.mp4">
 <aside class="notes" data-markdown="">Right turn at the same minimum radius reaches the goal pose. The UAV follows the path tangent throughout.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-044.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-044-37ed2a59e0.mp4">
 <aside class="notes" data-markdown="">The paper's finite-horizon objective penalizes active-waypoint error and steering effort. The supplied implementation additionally regularizes steering changes. Click to add constraints and the measured state.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-045.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-045-892f510976.mp4">
 <aside class="notes" data-markdown="">Anchor the predicted initial state to the measured state. Enforce nonlinear dynamics and the steering bound. The reduced state s contains x, y, and heading. Click to optimize the horizon.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-046.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-046-7174c649a4.mp4">
 <aside class="notes" data-markdown="">Solve for N future steering commands using the current active waypoint. Click to apply the first command.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-047.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-047-62960488ef.mp4">
 <aside class="notes" data-markdown="">Execute only the first input of the optimized control sequence. Click to close the feedback loop.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-048.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-048-c9a34dc674.mp4">
 <aside class="notes" data-markdown="">Measure the updated state, solve again, and repeat. Advance the active assigned waypoint inside its acceptance radius. Each UAV solves its own NMPC problem. Independent planning does not guarantee collision avoidance.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-049.mp4">
-<aside class="notes" data-markdown="">Figure 4, level 3. Each color owns only its matching nodes. Ring and connector identify its active target. Press next to start the MPC paths.</aside>
-</section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-050.mp4">
-<aside class="notes" data-markdown="">Every colored node has now been accepted by its owner in route order. The paths can pass close to another UAV's nodes because of fixed-wing turning and the 3 km target tolerance; those nodes never become its targets. All UAVs return within the depot tolerance.</aside>
-</section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-051.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-049-d4ae14d21c.mp4">
 <aside class="notes" data-markdown="">Figure 4, level 4. Each color owns only its matching nodes. Ring and connector identify its active target. This regenerated experiment uses route-aware MPC with horizon 20; it is distinct from the paper's original trajectory result. Press next to start the MPC paths.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-052.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-050-0671fad3ac.mp4">
 <aside class="notes" data-markdown="">Every colored node has now been accepted by its owner in route order. The paths can pass close to another UAV's nodes because of fixed-wing turning and the 3 km target tolerance; those nodes never become its targets. All UAVs return within the depot tolerance.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-053.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-051-625453cd84.mp4">
 <aside class="notes" data-markdown="">Figure 4, level 5. Each color owns only its matching nodes. Ring and connector identify its active target. Press next to start the MPC paths.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-054.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-052-fd9339faf8.mp4">
 <aside class="notes" data-markdown="">Every colored node has now been accepted by its owner in route order. The paths can pass close to another UAV's nodes because of fixed-wing turning and the 3 km target tolerance; those nodes never become its targets. All UAVs return within the depot tolerance.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-055.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-053-7cd75a3e20.mp4">
 <aside class="notes" data-markdown="">The benchmark uses all valid voxels, unlike the every-50th-voxel point cloud used for the representation figures and planning.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-056.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-054-b97eb4ab8c.mp4">
 <aside class="notes" data-markdown="">This slide shows the benchmark protocol, not a fabricated timing curve. Singleton nodes remain terminal. Parallel branches are a property of the hierarchy, while reported timings are single-threaded.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-057.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-055-b629ef4edd.mp4">
 <aside class="notes" data-markdown="">The paper demonstrates an end-to-end pipeline on a WRF-FIRE smoke snapshot and fleets of three and five UAVs.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-058.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-056-a4097d98a9.mp4">
 <aside class="notes" data-markdown="">Future work: model temporal dynamics, assimilate new measurements, add fleet interaction constraints, and validate against observations.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-059.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-057-17d8fa28cc.mp4">
 <aside class="notes" data-markdown="">Closing: Thank you. Click to turn the letter strokes into spatial samples.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-060.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-058-5da6a53624.mp4">
 <aside class="notes" data-markdown="">65,536 samples inside the text strokes. Display shows a deterministic subset. Click to fit 8 Gaussian nodes.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-061.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-059-41eedbf8fd.mp4">
 <aside class="notes" data-markdown="">Thank you: 8 full-covariance Gaussian nodes. Click to double the resolution.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-062.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-060-319bf7658a.mp4">
 <aside class="notes" data-markdown="">Thank you: 16 full-covariance Gaussian nodes. Click to double the resolution.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-063.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-061-650a3bfca9.mp4">
 <aside class="notes" data-markdown="">Thank you: 32 full-covariance Gaussian nodes. Click to double the resolution.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-064.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-062-04907c2bd1.mp4">
 <aside class="notes" data-markdown="">Thank you: 64 full-covariance Gaussian nodes. Click to double the resolution.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-065.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-063-dea8afd300.mp4">
 <aside class="notes" data-markdown="">Thank you: 128 full-covariance Gaussian nodes. Click to double the resolution.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-066.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-064-72fa3e0218.mp4">
 <aside class="notes" data-markdown="">Thank you: 256 full-covariance Gaussian nodes. Click to double the resolution.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-067.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-065-dedc539250.mp4">
 <aside class="notes" data-markdown="">Thank you: 512 full-covariance Gaussian nodes. Click to double the resolution.</aside>
 </section>
 </div>

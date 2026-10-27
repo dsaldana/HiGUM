@@ -12,11 +12,11 @@
   <meta property="og:image" content="https://dsaldana.github.io/HiGUM/assets/posters/wrf-hierarchy.jpg">
   <link rel="canonical" href="https://dsaldana.github.io/HiGUM/">
   <title>HiGUM | Hierarchical Gaussian Models for Smoke Monitoring</title>
-  <link rel="stylesheet" href="styles.css?v=native1">
+  <link rel="stylesheet" href="styles.css?v=native2">
   <script defer src="assets/data/hierarchy.js"></script>
-  <script defer src="app.js?v=native1"></script>
-  <script defer src="assets/data/animations.js?v=native1"></script>
-  <script defer src="animations.js?v=native1"></script>
+  <script defer src="app.js?v=native2"></script>
+  <script defer src="assets/data/animations.js?v=native2"></script>
+  <script defer src="animations.js?v=native2"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -112,9 +112,8 @@
 
       <div class="fleet-heading"><div><h3>Watch the fleet execute its plans.</h3><p>Each color owns its matching waypoints. A ring identifies the active target; filled nodes have been accepted by their assigned vehicle.</p></div><a class="text-link" href="slides.html" target="_blank" rel="noopener">Full presentation <span aria-hidden="true">↗</span></a></div>
       <div class="animation-group fleet-player" data-tabs>
-        <div class="tabs" role="tablist" aria-label="UAV fleet cases"><button id="tab-fleet3" type="button" role="tab" aria-selected="true" aria-controls="panel-fleet3">8 waypoints / 3 UAVs</button><button id="tab-fleet4" type="button" role="tab" aria-selected="false" aria-controls="panel-fleet4" tabindex="-1">16 waypoints / replanned</button><button id="tab-fleet5" type="button" role="tab" aria-selected="false" aria-controls="panel-fleet5" tabindex="-1">32 waypoints / 5 UAVs</button></div>
-        <figure id="panel-fleet3" role="tabpanel" aria-labelledby="tab-fleet3"><div class="native-animation" data-animation="fleet3" data-label="Eight waypoints with three UAVs"><p>Enable JavaScript to explore this animation.</p></div><figcaption id="caption-fleet3"><span class="figure-label">Figure 4 / Level 3</span> Three UAVs track eight assigned centroids with the paper’s original MPC. All assigned waypoints are accepted in route order before returning to the depot tolerance.</figcaption></figure>
-        <figure id="panel-fleet4" role="tabpanel" aria-labelledby="tab-fleet4" hidden><div class="native-animation" data-animation="fleet4" data-label="Replanned sixteen-waypoint fleet"><p>Enable JavaScript to explore this animation.</p></div><figcaption id="caption-fleet4"><span class="figure-label demo-label">Presentation demonstration / Level 4</span> A separately replanned, route-aware NMPC example with three UAVs and a 20-step horizon. It retains the assigned waypoint order and vehicle limits, totaling approximately 96 km versus the original 143 km. This is a presentation control experiment, not a replacement for the paper’s original result.</figcaption></figure>
+        <div class="tabs" role="tablist" aria-label="UAV fleet cases"><button id="tab-fleet4" type="button" role="tab" aria-selected="true" aria-controls="panel-fleet4">16 waypoints / replanned</button><button id="tab-fleet5" type="button" role="tab" aria-selected="false" aria-controls="panel-fleet5" tabindex="-1">32 waypoints / 5 UAVs</button></div>
+        <figure id="panel-fleet4" role="tabpanel" aria-labelledby="tab-fleet4"><div class="native-animation" data-animation="fleet4" data-label="Replanned sixteen-waypoint fleet"><p>Enable JavaScript to explore this animation.</p></div><figcaption id="caption-fleet4"><span class="figure-label demo-label">Presentation demonstration / Level 4</span> A separately replanned, route-aware NMPC example with three UAVs and a 20-step horizon. It retains the assigned waypoint order and vehicle limits, totaling approximately 96 km versus the original 143 km. This is a presentation control experiment, not a replacement for the paper’s original result.</figcaption></figure>
         <figure id="panel-fleet5" role="tabpanel" aria-labelledby="tab-fleet5" hidden><div class="native-animation" data-animation="fleet5" data-label="Thirty-two waypoints with five UAVs"><p>Enable JavaScript to explore this animation.</p></div><figcaption id="caption-fleet5"><span class="figure-label">Figure 4 / Level 5</span> Five UAVs track 32 assigned centroids using the paper’s original MPC. Finer representation supplies a larger set of monitoring waypoints.</figcaption></figure>
       </div>
       <p class="fleet-scope">Plans use a common depot, constant altitude, and the original 3 km waypoint-acceptance radius. Playback time is for presentation, rather than physical flight seconds. Independent vehicle planning does not enforce collision avoidance.</p>
@@ -122,7 +121,7 @@
 
     <section class="section resources-section" id="resources" aria-labelledby="resources-title"><div class="wrap">
       <div class="section-intro"><p class="eyebrow">04 / Read &amp; explore</p><h2 id="resources-title">The paper and its animated companion.</h2></div>
-      <div class="resource-list"><a href="assets/paper.pdf" target="_blank" rel="noopener"><span><strong>Read the manuscript</strong><small>The complete paper, including the model and evaluation.</small></span><span aria-hidden="true">↗</span></a><a href="slides.html" target="_blank" rel="noopener"><span><strong>Open the Manim presentation</strong><small>Original Manim export: 19 topics and 67 presenter-controlled steps.</small></span><span aria-hidden="true">↗</span></a><a href="assets/higum-source.zip" download><span><strong>Download the source</strong><small>Paper methods, Manim scenes, and precomputed slide data.</small></span><span aria-hidden="true">↓</span></a></div>
+      <div class="resource-list"><a href="assets/paper.pdf" target="_blank" rel="noopener"><span><strong>Read the manuscript</strong><small>The complete paper, including the model and evaluation.</small></span><span aria-hidden="true">↗</span></a><a href="slides.html" target="_blank" rel="noopener"><span><strong>Open the Manim presentation</strong><small>Original Manim export: 18 topics and 65 presenter-controlled steps.</small></span><span aria-hidden="true">↗</span></a><a href="assets/higum-source.zip" download><span><strong>Download the source</strong><small>Paper methods, Manim scenes, and precomputed slide data.</small></span><span aria-hidden="true">↓</span></a></div>
       <div class="citation"><div class="citation-heading"><h3>Cite this manuscript</h3><button type="button" id="copy-citation">Copy BibTeX <span aria-hidden="true">⧉</span></button></div><pre><code id="bibtex">@unpublished{saldana2026higum,
   title  = {{HiGUM}: A Hierarchical Gaussian Model for
             Cooperative Multi-UAV Smoke Monitoring},

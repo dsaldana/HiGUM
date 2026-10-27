@@ -52,7 +52,7 @@ def export():
                 dataset['root'] = cells([rep['root']])[0]
             payload['datasets'][stem] = dataset
         payload['smokeXY'] = rounded(data['wrf_points'][::6,:2])
-        for level in (3, 4, 5):
+        for level in (4, 5):
             source = improved if level == 4 else data
             stem = f'plans_level{level}'
             fleet = {'depot': rounded(source[stem+'_depot']), 'vehicles': [], 'replanned': level == 4}
@@ -79,7 +79,7 @@ def export():
     out = SITE/'assets/data/animations.js'
     out.write_text('window.HIGUM_ANIMATIONS='+json.dumps(payload, separators=(',', ':'), allow_nan=False)+';\n')
     shutil.copyfile(SLIDES/'assets/monitoring_uav.jpg', SITE/'assets/images/monitoring_uav.jpg')
-    print(f'Exported native animation data: {out.stat().st_size:,} bytes; 10 scenes; exact fleet acceptance events.')
+    print(f'Exported native animation data: {out.stat().st_size:,} bytes; 9 scenes; exact fleet acceptance events.')
 
 
 if __name__ == '__main__':

@@ -1,6 +1,6 @@
 const fs=require('fs'),vm=require('vm'),assert=require('assert');
 const path=require('path'),site=path.resolve(__dirname,'..');
-const kinds=['sources','binary','wrf','voxels','octree','dynamics','nmpc','fleet3','fleet4','fleet5'];
+const kinds=['sources','binary','wrf','voxels','octree','dynamics','nmpc','fleet4','fleet5'];
 let draws=0,frame;const resizes=[];
 const context=new Proxy({}, {get(t,k){return t[k]??((...args)=>{for(const a of args)if(typeof a==='number')assert(Number.isFinite(a),`Nonfinite canvas value: ${k}`);draws++;});},set(t,k,v){t[k]=v;return true;}});
 function element(){return {handlers:{},value:'0',textContent:'',clientWidth:600,clientHeight:375,hidden:false,addEventListener(e,cb){this.handlers[e]=cb;},setAttribute(){},closest(){return null;},setPointerCapture(){}};}
@@ -10,4 +10,4 @@ vm.createContext(sandbox);vm.runInContext(fs.readFileSync(path.join(site,'assets
 for(const width of [360,600,1200])for(const host of hosts){host.children.canvas.clientWidth=width;resizes.forEach(cb=>cb());for(const p of [0,100,333,500,750,999,1000]){const input=host.children.input;input.value=String(p);input.handlers.input();frame(1000+p);assert(host.children['.native-status'].textContent.length>0);}host.children['.native-reset'].handlers.click();host.children['.native-play'].handlers.click();frame(3000);frame(3050);assert.equal(host.children['.native-play'].textContent,'Pause');host.children['.native-play'].handlers.click();}
 const d=sandbox.window.HIGUM_ANIMATIONS;
 for(const [level,fleet] of Object.entries(d.fleets))for(const vehicle of fleet.vehicles){assert.equal(vehicle.accepted.length,vehicle.route.length);assert.equal(vehicle.accepted.at(-1),vehicle.trajectory.length-1);vehicle.accepted.forEach((index,i)=>assert(Math.hypot(vehicle.trajectory[index][0]-vehicle.route[i][0],vehicle.trajectory[index][1]-vehicle.route[i][1])<3));}
-console.log('All 10 scenes render without nonfinite geometry; start, intermediate, final, reset and play states pass. Exact fleet acceptance events pass. Drawing calls:',draws);
+console.log('All 9 scenes render without nonfinite geometry; start, intermediate, final, reset and play states pass. Exact fleet acceptance events pass. Drawing calls:',draws);

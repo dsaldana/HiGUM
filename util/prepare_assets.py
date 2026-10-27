@@ -34,11 +34,12 @@ def export_slides():
     segments = []
 
     def extract(match):
-        name = f"segment-{len(segments) + 1:03d}.mp4"
         payload = base64.b64decode(match.group(1), validate=True)
+        sha = hashlib.sha256(payload).hexdigest()
+        name = f"segment-{len(segments) + 1:03d}-{sha[:10]}.mp4"
         (output / name).write_bytes(payload)
         segments.append({"file": f"assets/slides/{name}", "bytes": len(payload),
-                         "sha256": hashlib.sha256(payload).hexdigest()})
+                         "sha256": sha})
         return f"assets/slides/{name}"
 
     source = (SLIDES / "higum.html").read_text()
@@ -46,6 +47,10 @@ def export_slides():
     if not segments:
         raise ValueError("The exported deck contains no embedded MP4 segments")
     (SITE / "slides.html").write_text(html)
+    retained = {Path(segment['file']).name for segment in segments}
+    for obsolete in output.glob('segment-*.mp4'):
+        if obsolete.name not in retained:
+            obsolete.unlink()
     return {"source_sha256": digest(SLIDES / "higum.html"), "segments": segments}
 
 
@@ -125,7 +130,7 @@ def main():
     export_viewer_data()
     export_source()
     export()
-    provenance = {"mode": "Native Canvas geometry animations", "featured_scenes": 10,
+    provenance = {"mode": "Native Canvas geometry animations", "featured_scenes": 9,
                   "source": "Exact Manim numerical data; no featured video clips.",
                   "manim_deck": slides}
     (ASSETS / "manifest.json").write_text(json.dumps(provenance, indent=2) + "\n")

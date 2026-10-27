@@ -1,6 +1,6 @@
 # HiGUM paper website
 
-Static paper page with ten native Canvas animations based on the numerical Manim
+Static paper page with nine native Canvas animations based on the numerical Manim
 slide data. Featured scenes contain no video player or prerecorded frames.
 No dependencies, backend, or build step are needed to view the site.
 
@@ -24,9 +24,9 @@ Visit `http://localhost:8000`. All assets use relative paths and work on GitHub 
   and acceptance events. All UAVs share one sample clock.
 - Animations start paused. Hidden panels and offscreen scenes pause automatically.
 
-The ten scenes cover Figures 1–3, voxels, octrees, Dubins UAV motion, the NMPC
-feedback loop, and the three Figure 4 fleet cases. The separate **Manim presentation**
-link preserves the original 19-topic video-based Manim Slides export; its local
+The nine scenes cover Figures 1–3, voxels, octrees, Dubins UAV motion, the NMPC
+feedback loop, and the two Figure 4 fleet cases. The separate **Manim presentation**
+link preserves the original 18-topic video-based Manim Slides export; its local
 segments in `assets/slides/` are used only by that original presentation.
 
 ## Publish
@@ -88,7 +88,7 @@ provenance records SHA-256 hashes of the two source NPZ bundles.
 - Dubins motion is an analytic tangent-continuous left-straight-right illustration
   at constant arclength speed. NMPC is an explanatory feedback-loop diagram;
   the browser does not solve an optimization problem.
-- Fleet levels 3 and 5 replay original MPC states. Level 4 replays the separately
+- Fleet level 5 replays original MPC states. Level 4 replays the separately
   replanned route-aware, 20-step-horizon presentation experiment (96 vs 143 km).
   This does not replace the paper's original result.
 - A waypoint is filled only after its assigned UAV's original acceptance event,
