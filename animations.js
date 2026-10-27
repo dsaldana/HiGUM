@@ -42,13 +42,13 @@
         this.bounds3d=this.kind==='voxels'||this.kind==='octree'?corners(this.dataset.root):this.dataset.points.concat(this.geometry.flatMap(level=>level.flatMap(n=>n.rings.flat())));
       } else if(this.kind==='nmpc') this.stages=['Measure current state','Optimize N future controls','Apply first control only','Measure again and repeat'];
       this.duration=this.motion?30:Math.max(1,this.stages.length-1)*4.8;
-      this.host.innerHTML=`<canvas tabindex="0" role="img" aria-label="${host.dataset.label}${this.is3d?'. Drag or use arrow keys to rotate.':''}"></canvas><div class="native-toolbar"><button type="button" class="native-play" aria-pressed="false">Play</button><button type="button" class="native-reset" aria-label="Restart ${host.dataset.label}">↺</button><input class="native-timeline" type="range" min="0" max="1000" value="0" aria-label="${this.motion?'Animation progress':'Animation step'}"><button type="button" class="native-next">${this.motion?'Finish':'Next step'}</button></div><p class="native-status" role="status" aria-live="polite"></p>${this.is3d?'<p class="native-hint">Drag to rotate · Arrow keys rotate · Step through or press Play</p>':''}`;
+      this.host.innerHTML=`${this.kind==='dynamics'?'<div class="dynamics-equations"><span>xₜ₊₁ = xₜ + Δt v₀ cos ψₜ</span><span>yₜ₊₁ = yₜ + Δt v₀ sin ψₜ</span><span>ψₜ₊₁ = ψₜ + Δt (v₀/L) tan δₜ</span></div>':''}<canvas tabindex="0" role="img" aria-label="${host.dataset.label}${this.is3d?'. Drag or use arrow keys to rotate.':''}"></canvas><div class="native-toolbar"><button type="button" class="native-play" aria-pressed="false">Play</button><button type="button" class="native-reset" aria-label="Restart ${host.dataset.label}">↺</button><input class="native-timeline" type="range" min="0" max="1000" value="0" aria-label="${this.motion?'Animation progress':'Animation step'}"><button type="button" class="native-next">${this.fleet?'Finish':'Next step'}</button></div><p class="native-status" role="status" aria-live="polite"></p>${this.is3d?'<p class="native-hint">Drag to rotate · Arrow keys rotate · Step through or press Play</p>':''}`;
       this.canvas=host.querySelector('canvas'); this.ctx=this.canvas.getContext('2d');
       this.playButton=host.querySelector('.native-play'); this.slider=host.querySelector('input'); this.status=host.querySelector('.native-status'); this.next=host.querySelector('.native-next');
       this.playButton.addEventListener('click',()=>{if(this.progress>=1)this.progress=0;this.setPlaying(!this.playing);});
       host.querySelector('.native-reset').addEventListener('click',()=>{this.setPlaying(false);this.setProgress(0);this.yaw=.65;this.pitch=.4;});
       this.slider.addEventListener('input',()=>{this.setPlaying(false);this.setProgress(Number(this.slider.value)/1000);});
-      this.next.addEventListener('click',()=>{this.setPlaying(false);this.setProgress(this.motion?1:Math.min(1,(Math.floor(this.progress*(this.stages.length-1)+1e-6)+1)/(this.stages.length-1)));});
+      this.next.addEventListener('click',()=>{this.setPlaying(false);this.setProgress(this.fleet?1:this.kind==='dynamics'?Math.min(1,(Math.floor(this.progress*data.dynamics.controls.length+1e-6)+1)/data.dynamics.controls.length):Math.min(1,(Math.floor(this.progress*(this.stages.length-1)+1e-6)+1)/(this.stages.length-1)));});
       if(this.is3d) {
         this.canvas.addEventListener('pointerdown',e=>{this.pointer=[e.clientX,e.clientY];this.canvas.setPointerCapture(e.pointerId);this.setPlaying(false);});
         this.canvas.addEventListener('pointermove',e=>{if(!this.pointer)return;this.yaw+=(e.clientX-this.pointer[0])*.006;this.pitch=clamp(this.pitch+(e.clientY-this.pointer[1])*.005,-.8,1.2);this.pointer=[e.clientX,e.clientY];this.dirty=true;});
@@ -91,7 +91,7 @@
       this.text(cellsMode?'Color: mean concentration':this.kind==='binary'?'Color: disjoint sample subsets':'Ellipsoids: 2 standard deviations',22,this.height-17,11);
       this.statusText(this.stages[index]);
     }
-    project2d(points) {const xs=points.map(p=>p[0]),ys=points.map(p=>p[1]),lo=[Math.min(...xs)-1,Math.min(...ys)-1],hi=[Math.max(...xs)+1,Math.max(...ys)+1];const scale=Math.min((this.width-92)/(hi[0]-lo[0]),(this.height-94)/(hi[1]-lo[1]));return {lo,hi,project:p=>[this.width/2+(p[0]-(lo[0]+hi[0])/2)*scale,this.height/2+8-(p[1]-(lo[1]+hi[1])/2)*scale]};}
+    project2d(points, inset=0) {const xs=points.map(p=>p[0]),ys=points.map(p=>p[1]),lo=[Math.min(...xs)-1,Math.min(...ys)-1],hi=[Math.max(...xs)+1,Math.max(...ys)+1];const scale=Math.min((this.width-92)/(hi[0]-lo[0]),(this.height-94-inset)/(hi[1]-lo[1]));return {lo,hi,project:p=>[this.width/2+(p[0]-(lo[0]+hi[0])/2)*scale,this.height/2+8-inset/2-(p[1]-(lo[1]+hi[1])/2)*scale]};}
     aircraft(position,yaw,color,size=12) {
       const outline=[[.95,0],[.25,.12],[-.2,.9],[-.45,.9],[-.22,.12],[-.75,.1],[-.95,.4],[-1.1,.4],[-1,0],[-1.1,-.4],[-.95,-.4],[-.75,-.1],[-.22,-.12],[-.45,-.9],[-.2,-.9],[.25,-.12]];
       const c=this.ctx;c.save();c.translate(...position);c.rotate(-yaw);c.beginPath();outline.forEach(([x,y],i)=>i?c.lineTo(x*size,y*size):c.moveTo(x*size,y*size));c.closePath();c.fillStyle=color;c.strokeStyle='#edf2f7';c.lineWidth=.6;c.fill();c.stroke();c.restore();
@@ -118,17 +118,33 @@
       this.statusText(`${accepted} / ${total} assigned waypoints accepted · ${Math.round(this.progress*100)}% playback`);
     }
     dynamics() {
-      const poses=data.dubins.poses,{project}=this.project2d(poses),idx=this.progress*(poses.length-1),k=Math.min(Math.floor(idx),poses.length-2),f=idx-k,state=mix(poses[k],poses[k+1],f);
-      this.line(poses.map(project),'#9cadc2',2,.45,[5,5]);
-      this.line([...poses.slice(0,k+1),state].map(project),'#62d9e8',3);
-      data.dubins.joins.forEach(t=>this.dot(project(poses[Math.round(t*(poses.length-1))]),'#ffb15b',4,false));
-      this.aircraft(project(state),state[2],'#ffb15b',this.width<500?13:18);
-      this.text('Left → straight → right',22,29,14,'#edf2f7');
-      this.text('Start',...mix(project(poses[0]),[project(poses[0])[0],project(poses[0])[1]+27],1),12);
-      const end=project(poses.at(-1));this.dot(end,'#edf2f7',4,false);this.text('Goal pose',end[0],end[1]-20,12,'#edf2f7','center');
-      this.text('Constant speed · bounded curvature',22,this.height-16,12);
-      const phase=this.progress<data.dubins.joins[0]?'Left turn':this.progress<data.dubins.joins[1]?'Straight flight':'Right turn';
-      this.statusText(`${phase} · ${Math.round(this.progress*100)}% of Dubins path`);
+      const model=data.dynamics,poses=model.states,n=model.controls.length;
+      const {project}=this.project2d(poses,70),t=this.progress*n,boundary=this.progress>0&&Math.abs(t-Math.round(t))<1e-7;
+      const j=boundary?Math.min(n-1,Math.round(t)-1):Math.min(n-1,Math.floor(t)),phase=boundary?1:t-j;
+      const a=poses[j],b=poses[j+1],move=clamp(phase/.65),turn=clamp((phase-.65)/.35);
+      const position=mix(a,b,move),yaw=a[2]+(b[2]-a[2])*turn;
+      const start=project(a),end=project(b),corner=[end[0],start[1]],current=project(position);
+      this.line(poses.slice(0,j+1).map(project),'#62d9e8',2.5);
+      this.line([start,current],'#62d9e8',2.5);
+      this.line([start,corner],'#62d9e8',1.6,.8,[4,4]);this.line([corner,end],'#ffb15b',1.6,.8,[4,4]);
+      this.dot(start,'#edf2f7',3);this.dot(end,'#edf2f7',4,false);
+      this.text('Δx',(start[0]+corner[0])/2,start[1]+19,12,'#62d9e8','center');
+      this.text('Δy',end[0]+8,(start[1]+end[1])/2,12,'#ffb15b');
+      // Old heading controls the translation. Rotate at the new state for the next Euler step.
+      const headingTip=angle=>[current[0]+35*Math.cos(angle),current[1]-35*Math.sin(angle)];
+      this.line([current,headingTip(a[2])],'#9cadc2',1,.6,[3,3]);
+      this.line([current,headingTip(yaw)],'#ffb15b',1.7);
+      if(turn>0&&Math.abs(b[2]-a[2])>.001){this.ctx.beginPath();this.ctx.strokeStyle='#ffb15b';this.ctx.lineWidth=1.6;this.ctx.arc(current[0],current[1],24,-a[2],-yaw,yaw>a[2]);this.ctx.stroke();}
+      this.aircraft(current,yaw,'#ffb15b',this.width<500?11:14);
+      this.text(`Step ${j+1}/${n} · δ = ${model.controls[j].toFixed(2)} rad`,18,27,this.width<430?12:14,'#edf2f7');
+      this.text(`ψ: ${(a[2]*180/Math.PI).toFixed(0)}° → ${(b[2]*180/Math.PI).toFixed(0)}°`,this.width-18,27,11,'#ffb15b','right');
+      this.host.querySelector('.dynamics-equations')?.querySelectorAll('span').forEach((equation,i)=>{
+        equation.style.color=(phase<.65?i<2:i===2)?(i===2?'#ffb15b':'#62d9e8'):'#c5d3e2';
+      });
+      const [dx,dy,dpsi]=model.increments[j];
+      this.text(`Δx = ${dx.toFixed(1)} m · Δy = ${dy.toFixed(1)} m · Δψ = ${dpsi.toFixed(2)} rad`,this.width/2,this.height-34,this.width<430?10:12,'#edf2f7','center');
+      this.text('Δt = 1 s · v₀ = 10 m/s · L = 10 m (illustrative)',this.width/2,this.height-15,this.width<430?9:11,'#9cadc2','center');
+      this.statusText(this.progress===1?'Six exact state updates complete':`Step ${j+1}/${n} · ${phase<.65?'Translate using ψₜ':'Update ψ for the next step'}`);
     }
     nmpc() {
       const active=Math.min(3,Math.floor(this.progress*3+1e-6)), c=this.ctx,w=this.width,h=this.height;

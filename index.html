@@ -12,11 +12,11 @@
   <meta property="og:image" content="https://dsaldana.github.io/HiGUM/assets/posters/wrf-hierarchy.jpg">
   <link rel="canonical" href="https://dsaldana.github.io/HiGUM/">
   <title>HiGUM | Hierarchical Gaussian Models for Smoke Monitoring</title>
-  <link rel="stylesheet" href="styles.css?v=native2">
+  <link rel="stylesheet" href="styles.css?v=dynamics3">
   <script defer src="assets/data/hierarchy.js"></script>
-  <script defer src="app.js?v=native2"></script>
-  <script defer src="assets/data/animations.js?v=native2"></script>
-  <script defer src="animations.js?v=native2"></script>
+  <script defer src="app.js?v=dynamics3"></script>
+  <script defer src="assets/data/animations.js?v=dynamics3"></script>
+  <script defer src="animations.js?v=dynamics3"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -106,7 +106,7 @@
     <section class="section wrap" id="flight" aria-labelledby="flight-title">
       <div class="section-intro"><p class="eyebrow">03 / Cooperative planning</p><h2 id="flight-title">From plume centroids<br>to fixed-wing flight.</h2><p class="section-lead">Select a hierarchy level, allocate centroids with <i>k</i>-means, order each cluster’s tour, and track its waypoints with nonlinear MPC.</p></div>
       <div class="control-grid">
-        <figure><h3>UAV dynamics</h3><img class="monitoring-uav" src="assets/images/monitoring_uav.jpg" alt="NASA Black Swift S2 fixed-wing UAV for aerial monitoring" loading="lazy" width="1280" height="413"><div class="native-animation" data-animation="dynamics" data-label="Fixed-wing UAV Dubins motion"><p>Enable JavaScript to explore this animation.</p></div><figcaption id="caption-dynamics">The reduced planar model fixes speed and altitude and bounds steering. A UAV follows a tangent-continuous left-straight-right Dubins curve. This is a motion illustration; the experiment trajectories below come from NMPC.</figcaption></figure>
+        <figure><h3>UAV dynamics</h3><img class="monitoring-uav" src="assets/images/monitoring_uav.jpg" alt="NASA Black Swift S2 fixed-wing UAV for aerial monitoring" loading="lazy" width="1280" height="413"><div class="native-animation" data-animation="dynamics" data-label="Discrete-time UAV dynamics"><p>Enable JavaScript to explore this animation.</p></div><figcaption id="caption-dynamics">The reduced planar model fixes speed and altitude and bounds steering. Each step translates the UAV using its current heading, resolving the motion into Δx and Δy. Steering then changes the heading used by the next step. These illustrative updates follow the displayed equations exactly; the fleet experiments below use NMPC.</figcaption></figure>
         <figure><h3>Nonlinear MPC</h3><div class="native-animation" data-animation="nmpc" data-label="Nonlinear MPC feedback loop"><p>Enable JavaScript to explore this animation.</p></div><figcaption id="caption-nmpc">Optimize a finite sequence of steering commands, apply only the first input, then measure and solve again. The objective balances waypoint error and steering effort under nonlinear dynamics and steering constraints.</figcaption></figure>
       </div>
 
@@ -121,7 +121,7 @@
 
     <section class="section resources-section" id="resources" aria-labelledby="resources-title"><div class="wrap">
       <div class="section-intro"><p class="eyebrow">04 / Read &amp; explore</p><h2 id="resources-title">The paper and its animated companion.</h2></div>
-      <div class="resource-list"><a href="assets/paper.pdf" target="_blank" rel="noopener"><span><strong>Read the manuscript</strong><small>The complete paper, including the model and evaluation.</small></span><span aria-hidden="true">↗</span></a><a href="slides.html" target="_blank" rel="noopener"><span><strong>Open the Manim presentation</strong><small>Original Manim export: 18 topics and 65 presenter-controlled steps.</small></span><span aria-hidden="true">↗</span></a><a href="assets/higum-source.zip" download><span><strong>Download the source</strong><small>Paper methods, Manim scenes, and precomputed slide data.</small></span><span aria-hidden="true">↓</span></a></div>
+      <div class="resource-list"><a href="assets/paper.pdf" target="_blank" rel="noopener"><span><strong>Read the manuscript</strong><small>The complete paper, including the model and evaluation.</small></span><span aria-hidden="true">↗</span></a><a href="slides.html" target="_blank" rel="noopener"><span><strong>Open the presentation</strong><small>Presentation: 18 topics and 68 presenter-controlled steps.</small></span><span aria-hidden="true">↗</span></a><a href="assets/higum-source.zip" download><span><strong>Download the source</strong><small>Paper methods, Manim scenes, and precomputed slide data.</small></span><span aria-hidden="true">↓</span></a></div>
       <div class="citation"><div class="citation-heading"><h3>Cite this manuscript</h3><button type="button" id="copy-citation">Copy BibTeX <span aria-hidden="true">⧉</span></button></div><pre><code id="bibtex">@unpublished{saldana2026higum,
   title  = {{HiGUM}: A Hierarchical Gaussian Model for
             Cooperative Multi-UAV Smoke Monitoring},

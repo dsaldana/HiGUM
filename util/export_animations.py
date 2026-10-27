@@ -12,7 +12,7 @@ SITE = Path(__file__).resolve().parents[1]
 SLIDES = SITE.parent / 'slides'
 sys.path.insert(0, str(SLIDES / 'util'))
 from spatial_representations import build_representation_data, validate_representation_data
-from control_slides import DubinsIllustration
+from control_slides import dynamics_data
 
 
 def rounded(values):
@@ -71,9 +71,7 @@ def export():
             matches = np.linalg.norm(np.array(assigned)[:,None,:]-data[f'wrf_level{level}_means'][None,:,:2],axis=-1)<1e-8
             assert np.all(matches.sum(0)==1) and np.all(matches.sum(1)==1)
             payload['fleets'][str(level)] = fleet
-    curve = DubinsIllustration()
-    payload['dubins'] = {'poses': [rounded(np.r_[curve.pose(s)[0][:2], curve.pose(s)[1]]) for s in np.linspace(0, curve.length, 301)],
-                         'joins': [curve.arc_length/curve.length, (curve.arc_length+curve.straight)/curve.length]}
+    payload['dynamics'] = dynamics_data()
     for filename in ('higum_data.npz', 'improved_plans.npz'):
         payload['provenance'][filename] = hashlib.sha256((SLIDES/'assets'/filename).read_bytes()).hexdigest()
     out = SITE/'assets/data/animations.js'

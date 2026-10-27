@@ -11,3 +11,19 @@ for(const width of [360,600,1200])for(const host of hosts){host.children.canvas.
 const d=sandbox.window.HIGUM_ANIMATIONS;
 for(const [level,fleet] of Object.entries(d.fleets))for(const vehicle of fleet.vehicles){assert.equal(vehicle.accepted.length,vehicle.route.length);assert.equal(vehicle.accepted.at(-1),vehicle.trajectory.length-1);vehicle.accepted.forEach((index,i)=>assert(Math.hypot(vehicle.trajectory[index][0]-vehicle.route[i][0],vehicle.trajectory[index][1]-vehicle.route[i][1])<3));}
 console.log('All 9 scenes render without nonfinite geometry; start, intermediate, final, reset and play states pass. Exact fleet acceptance events pass. Drawing calls:',draws);
+const model=d.dynamics;
+assert(model && model.states.length===model.controls.length+1);
+model.controls.forEach((delta,i)=>{
+  const before=model.states[i],after=model.states[i+1];
+  const increment=[model.dt*model.speed*Math.cos(before[2]),model.dt*model.speed*Math.sin(before[2]),model.dt*model.speed/model.length*Math.tan(delta)];
+  increment.forEach((expected,j)=>assert(Math.abs(after[j]-before[j]-expected)<1e-8));
+  assert(Math.abs(delta)<=model.steeringLimit);
+});
+const deck=fs.readFileSync(path.join(site,'slides.html'),'utf8');
+const navigation=deck.match(/<script id="higum-click-navigation">([\s\S]*?)<\/script>/)[1];
+let advances=0,paused=false,configuration;
+const video={duration:30,currentTime:8,ended:false,pause(){paused=true;}};
+let note='Every colored node has now been accepted';
+const nav={document:{addEventListener(){}},Reveal:{isOverview:()=>false,isPaused:()=>false,getCurrentSlide:()=>({querySelector:()=>({textContent:note}),slideBackgroundContentElement:{querySelector:()=>video}}),next(){advances++;},configure(c){configuration=c;},addKeyBinding(){}}};
+vm.createContext(nav);vm.runInContext(navigation,nav);nav.higumAdvance();assert(paused);assert.equal(advances,0);assert(video.currentTime>29.9);nav.higumAdvance();assert.equal(advances,1);assert.equal(configuration.autoSlide,false);
+console.log('Exact Euler state equations and finish-then-hold trajectory navigation pass.');

@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
-<title>Manim Slides</title>
+<title>HiGUM</title>
 
 
 <!-- Theme used for syntax highlighting of code -->
@@ -1276,88 +1276,97 @@ Please report this to https://github.com/markedjs/marked.`,e){let e=`<p>An error
 <section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-037-f6cab772bd.mp4">
 <aside class="notes" data-markdown="">K-means produces disjoint waypoint sets, one per UAV. Spatial clustering does not itself enforce balanced workloads.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-038-13457bd016.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-038-fe8756a3a0.mp4">
 <aside class="notes" data-markdown="">An exact depot-aware Hamiltonian cycle orders each small cluster. Dashed segments specify the intended waypoint tours.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-039-c5345f4dbf.mp4">
-<aside class="notes" data-markdown="">State: horizontal x, y, and heading psi. Fixed speed and altitude, with bounded steering. Photo illustrates an environmental-monitoring UAV, not the platform used in the paper. Photo source: https://www.nasa.gov/image-detail/crater-052025-loiacono-3978/. Click to show the Dubins motion diagram.</aside>
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-039-9029c9508e.mp4">
+<aside class="notes" data-markdown="">State: horizontal x, y, and heading psi. Fixed speed and altitude, with bounded steering. Photo illustrates an environmental-monitoring UAV, not the platform used in the paper. Photo source: https://www.nasa.gov/image-detail/crater-052025-loiacono-3978/. Click to illustrate the three state-update equations.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-040-1f4769b429.mp4">
-<aside class="notes" data-markdown="">Analytic left-straight-right Dubins illustration. Circular arcs have radius R_min, and meet the straight segment tangentially. R_min follows from the paper's continuous planar model. The schematic is separate from the NMPC-generated Figure 4 trajectories. Dubins reference: https://ompl.kavrakilab.org/core/classompl_1_1base_1_1DubinsStateSpace.html. Click to fly the left turn.</aside>
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-040-3d6e69058c.mp4">
+<aside class="notes" data-markdown="">Euler updates use the current heading psi_t for both x and y. Steering changes psi for the next step. Illustrative parameters: dt=1 s, v0=10 m/s, L=10 m, bounded steering. Click to apply the first step.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-041-0a9b880346.mp4">
-<aside class="notes" data-markdown="">Left turn at the minimum radius. Click to fly the straight segment.</aside>
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-041-0994abc84a.mp4">
+<aside class="notes" data-markdown="">Step 1: steering delta=+0.00 rad. Translate using the old heading: dx=9.66 m, dy=2.59 m. Then update heading by dpsi=+0.000 rad; this new heading drives the next position update. Click for the next step.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-042-41d167d944.mp4">
-<aside class="notes" data-markdown="">Straight segment with zero steering. Click to fly the right turn.</aside>
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-042-aa45860023.mp4">
+<aside class="notes" data-markdown="">Step 2: steering delta=+0.35 rad. Translate using the old heading: dx=9.66 m, dy=2.59 m. Then update heading by dpsi=+0.365 rad; this new heading drives the next position update. Click for the next step.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-043-281cb357ec.mp4">
-<aside class="notes" data-markdown="">Right turn at the same minimum radius reaches the goal pose. The UAV follows the path tangent throughout.</aside>
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-043-87c4d578d5.mp4">
+<aside class="notes" data-markdown="">Step 3: steering delta=+0.35 rad. Translate using the old heading: dx=8.10 m, dy=5.87 m. Then update heading by dpsi=+0.365 rad; this new heading drives the next position update. Click for the next step.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-044-37ed2a59e0.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-044-0677c16243.mp4">
+<aside class="notes" data-markdown="">Step 4: steering delta=+0.00 rad. Translate using the old heading: dx=5.47 m, dy=8.37 m. Then update heading by dpsi=+0.000 rad; this new heading drives the next position update. Click for the next step.</aside>
+</section>
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-045-b71f36fd23.mp4">
+<aside class="notes" data-markdown="">Step 5: steering delta=-0.35 rad. Translate using the old heading: dx=5.47 m, dy=8.37 m. Then update heading by dpsi=-0.365 rad; this new heading drives the next position update. Click for the next step.</aside>
+</section>
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-046-a74f75b60a.mp4">
+<aside class="notes" data-markdown="">Step 6: steering delta=-0.35 rad. Translate using the old heading: dx=8.10 m, dy=5.87 m. Then update heading by dpsi=-0.365 rad; this new heading drives the next position update. All six exact Euler steps are complete. Click to introduce NMPC.</aside>
+</section>
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-047-37ed2a59e0.mp4">
 <aside class="notes" data-markdown="">The paper's finite-horizon objective penalizes active-waypoint error and steering effort. The supplied implementation additionally regularizes steering changes. Click to add constraints and the measured state.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-045-892f510976.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-048-892f510976.mp4">
 <aside class="notes" data-markdown="">Anchor the predicted initial state to the measured state. Enforce nonlinear dynamics and the steering bound. The reduced state s contains x, y, and heading. Click to optimize the horizon.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-046-7174c649a4.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-049-7174c649a4.mp4">
 <aside class="notes" data-markdown="">Solve for N future steering commands using the current active waypoint. Click to apply the first command.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-047-62960488ef.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-050-62960488ef.mp4">
 <aside class="notes" data-markdown="">Execute only the first input of the optimized control sequence. Click to close the feedback loop.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-048-c9a34dc674.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-051-c9a34dc674.mp4">
 <aside class="notes" data-markdown="">Measure the updated state, solve again, and repeat. Advance the active assigned waypoint inside its acceptance radius. Each UAV solves its own NMPC problem. Independent planning does not guarantee collision avoidance.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-049-d4ae14d21c.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-052-d4ae14d21c.mp4">
 <aside class="notes" data-markdown="">Figure 4, level 4. Each color owns only its matching nodes. Ring and connector identify its active target. This regenerated experiment uses route-aware MPC with horizon 20; it is distinct from the paper's original trajectory result. Press next to start the MPC paths.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-050-0671fad3ac.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-053-0671fad3ac.mp4">
 <aside class="notes" data-markdown="">Every colored node has now been accepted by its owner in route order. The paths can pass close to another UAV's nodes because of fixed-wing turning and the 3 km target tolerance; those nodes never become its targets. All UAVs return within the depot tolerance.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-051-625453cd84.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-054-625453cd84.mp4">
 <aside class="notes" data-markdown="">Figure 4, level 5. Each color owns only its matching nodes. Ring and connector identify its active target. Press next to start the MPC paths.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-052-fd9339faf8.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-055-fd9339faf8.mp4">
 <aside class="notes" data-markdown="">Every colored node has now been accepted by its owner in route order. The paths can pass close to another UAV's nodes because of fixed-wing turning and the 3 km target tolerance; those nodes never become its targets. All UAVs return within the depot tolerance.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-053-7cd75a3e20.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-056-7cd75a3e20.mp4">
 <aside class="notes" data-markdown="">The benchmark uses all valid voxels, unlike the every-50th-voxel point cloud used for the representation figures and planning.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-054-b97eb4ab8c.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-057-b97eb4ab8c.mp4">
 <aside class="notes" data-markdown="">This slide shows the benchmark protocol, not a fabricated timing curve. Singleton nodes remain terminal. Parallel branches are a property of the hierarchy, while reported timings are single-threaded.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-055-b629ef4edd.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-058-b629ef4edd.mp4">
 <aside class="notes" data-markdown="">The paper demonstrates an end-to-end pipeline on a WRF-FIRE smoke snapshot and fleets of three and five UAVs.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-056-a4097d98a9.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-059-a4097d98a9.mp4">
 <aside class="notes" data-markdown="">Future work: model temporal dynamics, assimilate new measurements, add fleet interaction constraints, and validate against observations.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-057-17d8fa28cc.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-060-17d8fa28cc.mp4">
 <aside class="notes" data-markdown="">Closing: Thank you. Click to turn the letter strokes into spatial samples.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-058-5da6a53624.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-061-5da6a53624.mp4">
 <aside class="notes" data-markdown="">65,536 samples inside the text strokes. Display shows a deterministic subset. Click to fit 8 Gaussian nodes.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-059-41eedbf8fd.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-062-41eedbf8fd.mp4">
 <aside class="notes" data-markdown="">Thank you: 8 full-covariance Gaussian nodes. Click to double the resolution.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-060-319bf7658a.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-063-319bf7658a.mp4">
 <aside class="notes" data-markdown="">Thank you: 16 full-covariance Gaussian nodes. Click to double the resolution.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-061-650a3bfca9.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-064-650a3bfca9.mp4">
 <aside class="notes" data-markdown="">Thank you: 32 full-covariance Gaussian nodes. Click to double the resolution.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-062-04907c2bd1.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-065-04907c2bd1.mp4">
 <aside class="notes" data-markdown="">Thank you: 64 full-covariance Gaussian nodes. Click to double the resolution.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-063-dea8afd300.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-066-dea8afd300.mp4">
 <aside class="notes" data-markdown="">Thank you: 128 full-covariance Gaussian nodes. Click to double the resolution.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-064-72fa3e0218.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-067-72fa3e0218.mp4">
 <aside class="notes" data-markdown="">Thank you: 256 full-covariance Gaussian nodes. Click to double the resolution.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-065-dedc539250.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-068-dedc539250.mp4">
 <aside class="notes" data-markdown="">Thank you: 512 full-covariance Gaussian nodes. Click to double the resolution.</aside>
 </section>
 </div>
@@ -1630,13 +1639,34 @@ Please report this to https://github.com/markedjs/marked.`,e){let e=`<p>An error
     </script>
 
 <script id="higum-click-navigation">
-  // Deliberate presenter input advances every animation build.
+  // Finish a running fleet animation before navigating away from its final path.
+  function higumAdvance() {
+    if (typeof Reveal === 'undefined' || Reveal.isOverview() || Reveal.isPaused()) return;
+    const slide = Reveal.getCurrentSlide();
+    const finalTrajectory = slide.querySelector('.notes')?.textContent.includes('Every colored node has now been accepted');
+    const video = slide.slideBackgroundContentElement?.querySelector('video');
+    if (finalTrajectory && video && !video.ended) {
+      if (!Number.isFinite(video.duration) || video.duration <= 0) return;
+      if (video.currentTime < video.duration - 0.1) {
+        video.pause();
+        video.currentTime = Math.max(0, video.duration - 0.04);
+        return; // Hold the completed trajectory until another deliberate click.
+      }
+    }
+    Reveal.next();
+  }
+  Reveal.configure({autoSlide: false});
+  Reveal.addKeyBinding({keyCode: 39, key: 'RIGHT', description: 'Finish trajectory / next slide'}, higumAdvance);
+  document.addEventListener('click', function (event) {
+    if (!event.target.closest('.navigate-right, .navigate-down')) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    higumAdvance();
+  }, true);
   document.addEventListener('click', function (event) {
     if (event.button !== 0 || event.defaultPrevented) return;
     if (event.target.closest('a, button, input, textarea, select, .controls, .progress, .speaker-notes')) return;
-    if (typeof Reveal !== 'undefined' && !Reveal.isOverview() && !Reveal.isPaused()) {
-      Reveal.next();
-    }
+    higumAdvance();
   });
 </script>
 </body>

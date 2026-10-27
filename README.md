@@ -24,7 +24,7 @@ Visit `http://localhost:8000`. All assets use relative paths and work on GitHub 
   and acceptance events. All UAVs share one sample clock.
 - Animations start paused. Hidden panels and offscreen scenes pause automatically.
 
-The nine scenes cover Figures 1–3, voxels, octrees, Dubins UAV motion, the NMPC
+The nine scenes cover Figures 1–3, voxels, octrees, discrete-time UAV updates, the NMPC
 feedback loop, and the two Figure 4 fleet cases. The separate **Manim presentation**
 link preserves the original 18-topic video-based Manim Slides export; its local
 segments in `assets/slides/` are used only by that original presentation.
@@ -55,8 +55,7 @@ python website/util/export_animations.py
 ```
 
 This exports `assets/data/animations.js` from `slides/assets/higum_data.npz` and
-`improved_plans.npz`, reuses the slide voxel/octree routines and analytic Dubins
-curve, verifies waypoint ownership and acceptance, and copies the UAV photograph.
+`improved_plans.npz`, reuses the slide voxel/octree routines and explicit-Euler dynamics model, verifies waypoint ownership and acceptance, and copies the UAV photograph.
 It requires no video render, FFmpeg, or browser dependencies.
 
 Check the player states and trajectory acceptance events with Node.js:
@@ -85,8 +84,9 @@ provenance records SHA-256 hashes of the two source NPZ bundles.
   for WRF-FIRE. Concentration does not weight the spatial GMM fit.
 - Fixed voxels and sparse octrees use the exact same 900 Figure 1 samples. Empty
   cells are unobserved. These illustrate data structures, not full Voxblox/OctoMap.
-- Dubins motion is an analytic tangent-continuous left-straight-right illustration
-  at constant arclength speed. NMPC is an explanatory feedback-loop diagram;
+- Dynamics uses six exact Euler steps with fixed speed, x/y displacement components,
+  and steering-driven heading updates. The parameter values are illustrative, separate
+  from the flight experiments. NMPC is an explanatory feedback-loop diagram;
   the browser does not solve an optimization problem.
 - Fleet level 5 replays original MPC states. Level 4 replays the separately
   replanned route-aware, 20-step-horizon presentation experiment (96 vs 143 km).
