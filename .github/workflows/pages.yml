@@ -1,0 +1,45 @@
+name: Publish HiGUM to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Prepare the static site
+        shell: bash
+        run: |
+          if [ -f website/index.html ]; then
+            site_source=website
+          else
+            site_source=.
+          fi
+          mkdir -p _site
+          cp "$site_source/index.html" "$site_source/styles.css" "$site_source/app.js" "$site_source/slides.html" "$site_source/.nojekyll" _site/
+          cp -R "$site_source/assets" _site/assets
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - name: Deploy Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
