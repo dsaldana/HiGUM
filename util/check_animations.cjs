@@ -27,3 +27,17 @@ let note='Every colored node has now been accepted';
 const nav={document:{addEventListener(){}},Reveal:{isOverview:()=>false,isPaused:()=>false,getCurrentSlide:()=>({querySelector:()=>({textContent:note}),slideBackgroundContentElement:{querySelector:()=>video}}),next(){advances++;},configure(c){configuration=c;},addKeyBinding(){}}};
 vm.createContext(nav);vm.runInContext(navigation,nav);nav.higumAdvance();assert(paused);assert.equal(advances,0);assert(video.currentTime>29.9);nav.higumAdvance();assert.equal(advances,1);assert.equal(configuration.autoSlide,false);
 console.log('Exact Euler state equations and finish-then-hold trajectory navigation pass.');
+// On a nonzero-steering step, verify heading and position advance throughout
+// the same interval, including before the former translation-only phase ended.
+let posePosition,poseYaw;
+context.translate=(x,y)=>{posePosition=[x,y];};context.rotate=angle=>{poseYaw=-angle;};
+frame(19000);
+const motion=hosts.find(h=>h.dataset.animation==='dynamics');
+function poseAt(alpha){motion.children.input.value=String((1+alpha)/model.controls.length*1000);motion.children.input.handlers.input();frame(20000+alpha*100);return {position:posePosition.slice(),yaw:poseYaw};}
+const startPose=poseAt(0),endPose=poseAt(1),early=poseAt(.25),late=poseAt(.75);
+for(const [alpha,pose] of [[.25,early],[.75,late]]){
+  assert(Math.abs(pose.yaw-(model.states[1][2]+alpha*model.increments[1][2]))<1e-8);
+  pose.position.forEach((value,i)=>assert(Math.abs(value-(startPose.position[i]+alpha*(endPose.position[i]-startPose.position[i])))<1e-7));
+}
+assert(Math.hypot(late.position[0]-early.position[0],late.position[1]-early.position[1])>1);
+console.log('Concurrent translation and rotation verified at 25% and 75% of a steering step.');

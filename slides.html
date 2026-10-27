@@ -1279,29 +1279,29 @@ Please report this to https://github.com/markedjs/marked.`,e){let e=`<p>An error
 <section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-038-fe8756a3a0.mp4">
 <aside class="notes" data-markdown="">An exact depot-aware Hamiltonian cycle orders each small cluster. Dashed segments specify the intended waypoint tours.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-039-9029c9508e.mp4">
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-039-625b8d1c29.mp4">
 <aside class="notes" data-markdown="">State: horizontal x, y, and heading psi. Fixed speed and altitude, with bounded steering. Photo illustrates an environmental-monitoring UAV, not the platform used in the paper. Photo source: https://www.nasa.gov/image-detail/crater-052025-loiacono-3978/. Click to illustrate the three state-update equations.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-040-3d6e69058c.mp4">
-<aside class="notes" data-markdown="">Euler updates use the current heading psi_t for both x and y. Steering changes psi for the next step. Illustrative parameters: dt=1 s, v0=10 m/s, L=10 m, bounded steering. Click to apply the first step.</aside>
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-040-1d03a7f389.mp4">
+<aside class="notes" data-markdown="">The three Euler increments are computed from the same state at time t and applied simultaneously. Illustrative parameters: dt=1 s, v0=10 m/s, L=10 m, bounded steering. Click to apply the first step.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-041-0994abc84a.mp4">
-<aside class="notes" data-markdown="">Step 1: steering delta=+0.00 rad. Translate using the old heading: dx=9.66 m, dy=2.59 m. Then update heading by dpsi=+0.000 rad; this new heading drives the next position update. Click for the next step.</aside>
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-041-82accd5d77.mp4">
+<aside class="notes" data-markdown="">Step 1: steering delta=+0.00 rad. Apply the three increments simultaneously: dx=9.66 m, dy=2.59 m, dpsi=+0.000 rad. The position and heading increments share one clock and one state at t. Click for the next step.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-042-aa45860023.mp4">
-<aside class="notes" data-markdown="">Step 2: steering delta=+0.35 rad. Translate using the old heading: dx=9.66 m, dy=2.59 m. Then update heading by dpsi=+0.365 rad; this new heading drives the next position update. Click for the next step.</aside>
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-042-5354e274e7.mp4">
+<aside class="notes" data-markdown="">Step 2: steering delta=+0.35 rad. Apply the three increments simultaneously: dx=9.66 m, dy=2.59 m, dpsi=+0.365 rad. The position and heading increments share one clock and one state at t. Click for the next step.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-043-87c4d578d5.mp4">
-<aside class="notes" data-markdown="">Step 3: steering delta=+0.35 rad. Translate using the old heading: dx=8.10 m, dy=5.87 m. Then update heading by dpsi=+0.365 rad; this new heading drives the next position update. Click for the next step.</aside>
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-043-8282ec17d3.mp4">
+<aside class="notes" data-markdown="">Step 3: steering delta=+0.35 rad. Apply the three increments simultaneously: dx=8.10 m, dy=5.87 m, dpsi=+0.365 rad. The position and heading increments share one clock and one state at t. Click for the next step.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-044-0677c16243.mp4">
-<aside class="notes" data-markdown="">Step 4: steering delta=+0.00 rad. Translate using the old heading: dx=5.47 m, dy=8.37 m. Then update heading by dpsi=+0.000 rad; this new heading drives the next position update. Click for the next step.</aside>
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-044-b3f5b19f70.mp4">
+<aside class="notes" data-markdown="">Step 4: steering delta=+0.00 rad. Apply the three increments simultaneously: dx=5.47 m, dy=8.37 m, dpsi=+0.000 rad. The position and heading increments share one clock and one state at t. Click for the next step.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-045-b71f36fd23.mp4">
-<aside class="notes" data-markdown="">Step 5: steering delta=-0.35 rad. Translate using the old heading: dx=5.47 m, dy=8.37 m. Then update heading by dpsi=-0.365 rad; this new heading drives the next position update. Click for the next step.</aside>
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-045-88cfc9817d.mp4">
+<aside class="notes" data-markdown="">Step 5: steering delta=-0.35 rad. Apply the three increments simultaneously: dx=5.47 m, dy=8.37 m, dpsi=-0.365 rad. The position and heading increments share one clock and one state at t. Click for the next step.</aside>
 </section>
-<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-046-a74f75b60a.mp4">
-<aside class="notes" data-markdown="">Step 6: steering delta=-0.35 rad. Translate using the old heading: dx=8.10 m, dy=5.87 m. Then update heading by dpsi=-0.365 rad; this new heading drives the next position update. All six exact Euler steps are complete. Click to introduce NMPC.</aside>
+<section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-046-7e207273e0.mp4">
+<aside class="notes" data-markdown="">Step 6: steering delta=-0.35 rad. Apply the three increments simultaneously: dx=8.10 m, dy=5.87 m, dpsi=-0.365 rad. The position and heading increments share one clock and one state at t. All six exact Euler steps are complete. Click to introduce NMPC.</aside>
 </section>
 <section data-background-color="#0b1423" data-background-size="contain" data-background-video="assets/slides/segment-047-37ed2a59e0.mp4">
 <aside class="notes" data-markdown="">The paper's finite-horizon objective penalizes active-waypoint error and steering effort. The supplied implementation additionally regularizes steering changes. Click to add constraints and the measured state.</aside>

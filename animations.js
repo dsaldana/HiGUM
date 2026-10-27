@@ -121,7 +121,7 @@
       const model=data.dynamics,poses=model.states,n=model.controls.length;
       const {project}=this.project2d(poses,70),t=this.progress*n,boundary=this.progress>0&&Math.abs(t-Math.round(t))<1e-7;
       const j=boundary?Math.min(n-1,Math.round(t)-1):Math.min(n-1,Math.floor(t)),phase=boundary?1:t-j;
-      const a=poses[j],b=poses[j+1],move=clamp(phase/.65),turn=clamp((phase-.65)/.35);
+      const a=poses[j],b=poses[j+1],move=phase,turn=phase;
       const position=mix(a,b,move),yaw=a[2]+(b[2]-a[2])*turn;
       const start=project(a),end=project(b),corner=[end[0],start[1]],current=project(position);
       this.line(poses.slice(0,j+1).map(project),'#62d9e8',2.5);
@@ -130,7 +130,7 @@
       this.dot(start,'#edf2f7',3);this.dot(end,'#edf2f7',4,false);
       this.text('Δx',(start[0]+corner[0])/2,start[1]+19,12,'#62d9e8','center');
       this.text('Δy',end[0]+8,(start[1]+end[1])/2,12,'#ffb15b');
-      // Old heading controls the translation. Rotate at the new state for the next Euler step.
+      // All components of the discrete state update share the same animation clock.
       const headingTip=angle=>[current[0]+35*Math.cos(angle),current[1]-35*Math.sin(angle)];
       this.line([current,headingTip(a[2])],'#9cadc2',1,.6,[3,3]);
       this.line([current,headingTip(yaw)],'#ffb15b',1.7);
@@ -139,12 +139,12 @@
       this.text(`Step ${j+1}/${n} · δ = ${model.controls[j].toFixed(2)} rad`,18,27,this.width<430?12:14,'#edf2f7');
       this.text(`ψ: ${(a[2]*180/Math.PI).toFixed(0)}° → ${(b[2]*180/Math.PI).toFixed(0)}°`,this.width-18,27,11,'#ffb15b','right');
       this.host.querySelector('.dynamics-equations')?.querySelectorAll('span').forEach((equation,i)=>{
-        equation.style.color=(phase<.65?i<2:i===2)?(i===2?'#ffb15b':'#62d9e8'):'#c5d3e2';
+        equation.style.color=i===2?'#ffb15b':'#62d9e8';
       });
       const [dx,dy,dpsi]=model.increments[j];
       this.text(`Δx = ${dx.toFixed(1)} m · Δy = ${dy.toFixed(1)} m · Δψ = ${dpsi.toFixed(2)} rad`,this.width/2,this.height-34,this.width<430?10:12,'#edf2f7','center');
       this.text('Δt = 1 s · v₀ = 10 m/s · L = 10 m (illustrative)',this.width/2,this.height-15,this.width<430?9:11,'#9cadc2','center');
-      this.statusText(this.progress===1?'Six exact state updates complete':`Step ${j+1}/${n} · ${phase<.65?'Translate using ψₜ':'Update ψ for the next step'}`);
+      this.statusText(this.progress===1?'Six exact state updates complete':`Step ${j+1}/${n} · Translate and rotate together`);
     }
     nmpc() {
       const active=Math.min(3,Math.floor(this.progress*3+1e-6)), c=this.ctx,w=this.width,h=this.height;

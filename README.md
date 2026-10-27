@@ -85,7 +85,7 @@ provenance records SHA-256 hashes of the two source NPZ bundles.
 - Fixed voxels and sparse octrees use the exact same 900 Figure 1 samples. Empty
   cells are unobserved. These illustrate data structures, not full Voxblox/OctoMap.
 - Dynamics uses six exact Euler steps with fixed speed, x/y displacement components,
-  and steering-driven heading updates. The parameter values are illustrative, separate
+  and simultaneous steering-driven heading updates. The parameter values are illustrative, separate
   from the flight experiments. NMPC is an explanatory feedback-loop diagram;
   the browser does not solve an optimization problem.
 - Fleet level 5 replays original MPC states. Level 4 replays the separately
