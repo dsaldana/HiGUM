@@ -1,119 +1,123 @@
 # HiGUM paper website
 
-Static GitHub Pages site based on the Manim presentation in `../slides/`.
-The page includes a live 3D Gaussian hierarchy, ten video animations, the paper,
-an interactive slide deck, a source-code bundle, and a manuscript citation.
-All runtime assets are local. No JavaScript dependencies, backend, or build step
-are required.
+Static paper page with ten native Canvas animations based on the numerical Manim
+slide data. Featured scenes contain no video player or prerecorded frames.
+No dependencies, backend, or build step are needed to view the site.
 
 ## Preview
 
-Open `index.html` directly, or run this command from the paper project root:
+Open `index.html` directly, or from the paper project root run:
 
 ```bash
 python3 -m http.server 8000 --directory website
 ```
 
-Then visit `http://localhost:8000`. The site also works under a GitHub project
-subpath because asset URLs are relative.
+Visit `http://localhost:8000`. All assets use relative paths and work on GitHub Pages.
 
-## Publish on GitHub Pages
+## Animation controls
 
-Target repository: [dsaldana/HiGUM](https://github.com/dsaldana/HiGUM).
-Expected Pages address after deployment: `https://dsaldana.github.io/HiGUM/`.
-This address is a deployment target, not a claim that publication has completed.
+- **Play / Pause** runs the scene at the selected animation speed.
+- **Next step** advances Gaussian levels, voxel resolution, octree depth, or NMPC stages.
+- The slider scrubs progress; **↺** restarts and restores the view.
+- Drag a smoke scene, or focus its canvas and use arrow keys, to rotate the 3D view.
+- Fleet scenes draw each recorded trajectory, its assigned waypoints, the active target,
+  and acceptance events. All UAVs share one sample clock.
+- Animations start paused. Hidden panels and offscreen scenes pause automatically.
 
-The contents of `website/` can be the root of a dedicated repository. The included
-`.github/workflows/pages.yml` publishes the site when changes reach `main`.
+The ten scenes cover Figures 1–3, voxels, octrees, Dubins UAV motion, the NMPC
+feedback loop, and the three Figure 4 fleet cases. The separate **Manim presentation**
+link preserves the original 19-topic video-based Manim Slides export; its local
+segments in `assets/slides/` are used only by that original presentation.
 
-This folder is already a local Git repository on `main`, with `origin` configured
-for `dsaldana/HiGUM` and the website committed on top of the existing repository
-history. From the paper project root, push it with:
+## Publish
+
+Repository: [dsaldana/HiGUM](https://github.com/dsaldana/HiGUM).
+Public page: [dsaldana.github.io/HiGUM](https://dsaldana.github.io/HiGUM/).
+
+This folder is a Git repository with `origin` configured. After committing changes,
+push from the paper project root:
 
 ```bash
 git -C website push -u origin main
 ```
 
-If your terminal is already inside `website/`, use `git push -u origin main`.
-Authenticate with your normal GitHub credentials when Git requests them.
+Or use **Push origin** in GitHub Desktop. In repository **Settings → Pages**, use
+**GitHub Actions**. `.github/workflows/pages.yml` publishes `main` automatically.
+If this folder is placed inside the paper repository, copy the workflow to the
+repository root; it detects either layout and publishes only the website files.
 
-1. Push the local `main` branch using the command above.
-2. In the repository’s **Settings → Pages**, select **GitHub Actions** as the source.
-3. Run the **Publish HiGUM to GitHub Pages** workflow, or push a commit to `main`.
-4. The deployment job reports the published URL.
+## Regenerate the numerical assets
 
-If the repository contains the whole paper project instead, keep this folder as
-`website/` and copy `website/.github/workflows/pages.yml` to the repository root’s
-`.github/workflows/pages.yml`. The workflow detects either layout and uploads only
-the public static site files. It does not publish the surrounding Overleaf project.
+Use the same Python environment as the slides (NumPy and Manim installed):
 
-The workflow uses GitHub’s built-in short-lived token with `contents: read`,
-`pages: write`, and `id-token: write`. No personal access token is stored in the site.
-See [GitHub’s custom Pages workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
+```bash
+python website/util/export_animations.py
+```
 
-## Update animations and data
+This exports `assets/data/animations.js` from `slides/assets/higum_data.npz` and
+`improved_plans.npz`, reuses the slide voxel/octree routines and analytic Dubins
+curve, verifies waypoint ownership and acceptance, and copies the UAV photograph.
+It requires no video render, FFmpeg, or browser dependencies.
 
-First render and export the updated slide deck, as described in `../slides/readme.md`.
-Then use the environment containing NumPy and FFmpeg:
+Check the player states and trajectory acceptance events with Node.js:
+
+```bash
+node website/util/check_animations.cjs
+```
+
+To also update the paper, hero viewer data, source ZIP, logos, photo, and original
+Manim export, first export the slides as described in `../slides/readme.md`, then run:
 
 ```bash
 python website/util/prepare_assets.py
 ```
 
-Run this from the paper project root. Unchanged video clips are reused. Use
-`--force` to re-encode them. The script:
+`assets/manifest.json` records the original Manim export segments. Native data
+provenance records SHA-256 hashes of the two source NPZ bundles.
 
-- extracts ten 720p H.264 clips and poster frames from the current rendered deck;
-- exports real WRF-FIRE hierarchy statistics from `slides/assets/higum_data.npz`;
-- copies the manuscript, official logos, and motivation photo;
-- exports the complete slide player with local video segments in `assets/slides/`;
-- builds a source ZIP with original methods, Manim scenes, and precomputed arrays.
+## Scientific scope
 
-The script trims transitions using the slides’ default animation pace of 1.6.
-The generated clips and static assets are committed to the website repository,
-so GitHub does not need Manim, TeX, NumPy, or FFmpeg to deploy it. Keep individual
-files below GitHub’s repository size limit. The slide videos are separate files,
-each below the browser uploader’s 25 MB limit. Keep `slides.html` and `assets/`
-together when copying or downloading the site for offline use.
+- Figures 1 and 2 use all 900 and 650 slide samples, respectively. Hard-assignment
+  subset colors in Figure 2 match the fitted hierarchy's labels.
+- WRF-FIRE displays 850 deterministic samples of the slide's every-50th-valid-voxel
+  subset. The separate benchmark uses all 257,896 valid samples. Z is exaggerated ×6.
+- Ellipsoids show two standard deviations. Color encodes mean PM2.5, logarithmically
+  for WRF-FIRE. Concentration does not weight the spatial GMM fit.
+- Fixed voxels and sparse octrees use the exact same 900 Figure 1 samples. Empty
+  cells are unobserved. These illustrate data structures, not full Voxblox/OctoMap.
+- Dubins motion is an analytic tangent-continuous left-straight-right illustration
+  at constant arclength speed. NMPC is an explanatory feedback-loop diagram;
+  the browser does not solve an optimization problem.
+- Fleet levels 3 and 5 replay original MPC states. Level 4 replays the separately
+  replanned route-aware, 20-step-horizon presentation experiment (96 vs 143 km).
+  This does not replace the paper's original result.
+- A waypoint is filled only after its assigned UAV's original acceptance event,
+  checked at control-interval endpoints within the 3 km tolerance. Interpolation
+  is for display only; it does not change or replan trajectories. Playback time is
+  distinct from model time. Independent planning imposes no collision avoidance.
+- The manuscript citation claims no DOI or acceptance.
 
-`assets/manifest.json` records clip source timestamps and source hashes.
-`assets/data/hierarchy.json` stores the viewer data; the equivalent classic-script
-version permits the viewer to work even when the page is opened directly from disk.
+## Attribution
 
-## Scientific scope and attribution
-
-- Hero and Figure 3: static WRF-FIRE snapshot, every-50th-valid-voxel representation;
-  the viewer displays 850 deterministic samples. Ellipsoids show two standard
-  deviations. Color encodes mean PM2.5 on a log scale. Height is exaggerated six times.
-- Figures 1 and 2: the slide animations of the synthetic plume and recursive hierarchy.
-- Voxels and octree: supplementary spatial-data-structure illustrations from the slides,
-  not complete reproductions of Voxblox or OctoMap.
-- UAV dynamics: an analytic left-straight-right Dubins illustration, separate from the
-  experiment trajectories. NMPC video explains the objective and feedback loop.
-- Level-3 and level-5 fleet clips use the paper’s original MPC data. The level-4 clip
-  is explicitly labeled as the separately replanned demonstration from slide 15.
-- Playback seconds are not physical flight seconds. Independent planning does not
-  impose collision avoidance. Original waypoint acceptance tolerance is 3 km.
-- The citation is marked as an unpublished manuscript; no DOI or acceptance is claimed.
-
-Forest photograph: Mike Lewelling / National Park Service, public domain,
+Forest: Mike Lewelling / National Park Service, public domain,
 [Alder Fire in Yellowstone](https://commons.wikimedia.org/wiki/File:Wildfire_(14503287131).jpg).
-UAV photograph: NASA / Milan Loiacono,
+UAV: NASA / Milan Loiacono,
 [Black Swift S2](https://www.nasa.gov/image-detail/crater-052025-loiacono-3978/).
-University logos are unchanged official artwork from
-[Lehigh University](https://www.lehigh.edu/LTS/communication/logos/) and
-[UT Arlington](https://www.uta.edu/).
-Detailed image provenance is preserved in the source ZIP’s `slides/assets/` directory.
+Logos: unchanged official [Lehigh University](https://www.lehigh.edu/LTS/communication/logos/)
+and [UT Arlington](https://www.uta.edu/) artwork. Image provenance is also in the
+source ZIP's `slides/assets/` directory.
 
 ## Files
 
 ```text
-website/
-  index.html                  Paper page
-  styles.css                  Responsive layout and typography
-  app.js                      Viewer, video controls, tabs, citation copy
-  slides.html                 Complete Manim Slides player (videos in assets/)
-  .github/workflows/pages.yml GitHub Pages deployment
-  assets/                     Videos, posters, data, paper, source archive, images
-  util/prepare_assets.py       Rebuild assets from the paper and slides
+index.html                   Paper page
+styles.css                   Responsive layout
+app.js                       Navigation, tabs, citation, hero viewer
+animations.js                Native geometry players and controls
+assets/data/animations.js    Exact exported slide geometry and trajectories
+slides.html                  Separate original Manim Slides export
+assets/                      Data, paper, source archive, photos, Manim segments
+util/export_animations.py    Rebuild native animation data
+util/prepare_assets.py       Rebuild all supporting assets
+.github/workflows/pages.yml GitHub Pages deployment
 ```

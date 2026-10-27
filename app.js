@@ -13,7 +13,6 @@ navigation.querySelectorAll("a").forEach(link => link.addEventListener("click", 
   navigation.classList.remove("is-open");
 }));
 
-const videos = Array.from(document.querySelectorAll("video"));
 document.querySelectorAll("[data-tabs]").forEach(group => {
   const tabs = Array.from(group.querySelectorAll('[role="tab"]'));
   const activate = tab => {
@@ -23,8 +22,8 @@ document.querySelectorAll("[data-tabs]").forEach(group => {
       item.tabIndex = selected ? 0 : -1;
       const panel = document.getElementById(item.getAttribute("aria-controls"));
       panel.hidden = !selected;
-      if (!selected) panel.querySelectorAll("video").forEach(video => video.pause());
     });
+    document.dispatchEvent(new Event("higum:tabchange"));
   };
   tabs.forEach((tab, index) => {
     tab.addEventListener("click", () => activate(tab));
@@ -37,24 +36,6 @@ document.querySelectorAll("[data-tabs]").forEach(group => {
       if (target) { event.preventDefault(); activate(target); target.focus(); }
     });
   });
-});
-
-document.getElementById("animation-speed").addEventListener("change", event => {
-  videos.forEach(video => { video.playbackRate = Number(event.target.value); });
-});
-videos.forEach(video => video.addEventListener("play", () => {
-  videos.forEach(other => { if (other !== video) other.pause(); });
-}));
-if ("IntersectionObserver" in window) {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting && document.fullscreenElement !== entry.target) entry.target.pause();
-    });
-  }, { threshold: 0.08 });
-  videos.forEach(video => observer.observe(video));
-}
-document.addEventListener("visibilitychange", () => {
-  if (document.hidden) videos.forEach(video => video.pause());
 });
 
 document.getElementById("copy-citation").addEventListener("click", async event => {

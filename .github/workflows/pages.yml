@@ -34,7 +34,7 @@ jobs:
             site_source=.
           fi
           mkdir -p _site
-          cp "$site_source/index.html" "$site_source/styles.css" "$site_source/app.js" "$site_source/slides.html" "$site_source/.nojekyll" _site/
+          cp "$site_source/index.html" "$site_source/styles.css" "$site_source/app.js" "$site_source/animations.js" "$site_source/slides.html" "$site_source/.nojekyll" _site/
           cp -R "$site_source/assets" _site/assets
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
